@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="./myvue/myvue.js"></script>
+</head>
+<body>
+  <div id="app">
+    <p id="p1">{{foo}}</p> 
+    <p>{{counter}}</p>
+    <p k-text="counter"></p>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el:'#app',
+      data: {
+        foo: 'foo',
+        counter: 0
+      },
+      // mounted () {
+      //   // this.foo = '1'
+      //   // this.foo = '2'
+      //   // this.foo = '3'
+      //   // this.arr[0] = '23'
+      //   // console.log('p1.innerHtml1', p1.innerHtml)
+      //   // Promise.resolve().then(() => {
+      //   //   console.log('p1.innerHtml2', p1.innerHtml)
+      //   // })
+      //   // this.$nextTick(() => {
+      //   //   console.log('p1.innerHtml3', p1.innerHtml)
+      //   // })
+      // },
+    })
+    setInterval(() => {
+      app.counter++
+    }, 1000)
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var sortedSquares = function (nums) {
+        let left = 0;
+        let right = 0;
+        let boundary = 0;
+        while (nums[boundary] < 0) {
+          boundary++;
+        }
+        right = boundary;
+        left = right - 1;
+        let n = nums.length;
+        let res = [];
+        console.log(left, right, boundary);
+        while (left >= 0 || right < n) {
+          let powLeft = Math.pow(nums[left], 2);
+          let powRight = Math.pow(nums[right], 2);
+          if (left < 0) {
+            res.push(powRight);
+            right++;
+          } else if (right >= n) {
+            res.push(powLeft);
+            left--;
+          } else if (powLeft < powRight) {
+            res.push(powLeft);
+            left--;
+          } else {
+            res.push(powRight);
+            right++;
+          }
+        }
+        return res;
+      };
+      // console.log(sortedSquares([-1]))
+      var reverseWords = function (s) {
+        let res = [];
+        let strList = s.split(" ");
+        for (let i = 0; i < strList.length; i++) {
+          res.push(reverseWord(strList[i]));
+        }
+        function reverseWord(str) {
+          let resstr = str.split("");
+          let left = 0;
+          let right = resstr.length - 1;
+          while (left < right) {
+            let temp = resstr[left];
+            resstr[left] = resstr[right];
+            resstr[right] = temp;
+            left++;
+            right--;
+          }
+          return resstr.join("");
+        }
+        return res.join(" ");
+      };
+      // reverseWords()
+      /**
+       * Definition for singly-linked list.
+       
+       */
+      function ListNode(val, next) {
+        this.val = val === undefined ? 0 : val;
+        this.next = next === undefined ? null : next;
+      }
+      function createNode(n) {
+        let head = new ListNode(0, null);
+        let headNode = head;
+        for (let i = 1; i < n; i++) {
+          let node = new ListNode(i, null);
+          headNode.next = node;
+          headNode = headNode.next;
+        }
+        return head;
+      }
+      /**
+       * @param {ListNode} head
+       * @param {number} n
+       * @return {ListNode}
+       */
+      var removeNthFromEnd = function (head, n) {
+        function findNode() {
+          let nNode = head;
+          let rightNode = head;
+          let leftIndex = 0;
+          let rightIndex = 0;
+          let preNode = head;
+          while (rightNode.next) {
+            rightNode = rightNode.next;
+            rightIndex++;
+            if (rightIndex - leftIndex > n - 1) {
+              preNode = nNode;
+              console.log(preNode);
+              nNode = nNode.next;
+              leftIndex++;
+            }
+          }
+          return {
+            preNode,
+            nNode,
+          };
+        }
+        let { preNode, nNode } = findNode();
+        console.log(preNode);
+        if (nNode == head) {
+          // 要删除头节点
+          head = nNode.next;
+        } else if (!nNode.next) {
+          // 删除尾节点
+          preNode.next = null;
+        } else {
+          // 删除中间节点
+          preNode.next = nNode.next;
+        }
+        nNode = null;
+        return head;
+      };
+      console.log(removeNthFromEnd(createNode(2), 1));
+
+      let arr = [1, 2, 4, 5, 6, 6, 7, 8, 9, 5, 4, 3];
+      let set = new Set(arr);
+      console.time("arr");
+      arr.indexOf(9);
+      console.timeEnd("arr");
+      console.time("set");
+      set.has(9);
+      console.timeEnd("set");
+    </script>
+  </body>
+</html>

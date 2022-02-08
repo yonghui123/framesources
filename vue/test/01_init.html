@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <p id="p1">{{foo}}</p> -->
+      <p>{{arr[0]}}</p>
+      <p>{{bar}}</p>
+      <p>{{arr[1].name}}</p>
+      <button v-on:click="handleClick">click me</button>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          foo: "foo",
+          arr: [1, { name: 6 }, 4],
+          bar: 0,
+        },
+        mounted() {
+          // debugger
+          // this.foo = '1'
+          // this.foo = '2'
+          // this.foo = '3'
+          this.bar++;
+          this.arr[1].name = 7;
+          // console.log('p1.innerHtml1', p1.innerHtml)
+          // Promise.resolve().then(() => {
+          //   console.log('p1.innerHtml2', p1.innerHtml)
+          // })
+          // this.$nextTick(() => {
+          //   console.log('p1.innerHtml3', p1.innerHtml)
+          // })
+          // setInterval(() => {
+          //   // this.arr[0]++
+          //   // this.$set(this.arr, 0, num)
+          //   this.bar++
+          //   this.arr[4] = this.bar
+          // }, 1000)
+        },
+        methods: {
+          handleClick() {
+            // this.arr[1].name++
+            this.$set(this.arr, 0, ++this.bar)
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
